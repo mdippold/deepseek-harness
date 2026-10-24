@@ -1,0 +1,12 @@
+.seat {
+  position: absolute;
+  right: 12px;
+  bottom: 12px;
+  pointer-events: auto;
+}
+
+.anchor {
+  display: inline-flex;
+  border-radius: 999px;
+  cursor: default;
+}

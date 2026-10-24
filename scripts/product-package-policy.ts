@@ -49,4 +49,18 @@ export const PRODUCT_PACKAGE_POLICY: Readonly<Record<string, ProductPackagePolic
   'packages/client/web': { category: 'web-distribution', reason: 'Browser boot kernel bundled into the Web distribution.' },
   'packages/client/ui-dockkit': { category: 'web-distribution', reason: 'Layout library bundled into the Web distribution.' },
   'packages/util/package-manifest': { category: 'declarations', reason: 'Shared package metadata declarations have no runtime mount.' },
+  // Local-only privacy fork: disabled by packages/bundle/*/privacy.patch.yml.
+  'packages/client/ui-message-feedback': { category: 'optional', reason: 'Disabled by the local-only privacy layer; data egress or DeepSeek-service integration.' },
+  'packages/client/ui-settings-account': { category: 'optional', reason: 'Disabled by the local-only privacy layer; data egress or DeepSeek-service integration.' },
+  'packages/client/ui-settings-web-search': { category: 'optional', reason: 'Disabled by the local-only privacy layer; data egress or DeepSeek-service integration.' },
+  'packages/credentials/deepseek-account-platform': { category: 'optional', reason: 'Disabled by the local-only privacy layer; data egress or DeepSeek-service integration.' },
+  'packages/host/product-telemetry-otel': { category: 'optional', reason: 'Disabled by the local-only privacy layer; data egress or DeepSeek-service integration.' },
+  'packages/llm/deepseek-llm-api-extensions': { category: 'optional', reason: 'Disabled by the local-only privacy layer; data egress or DeepSeek-service integration.' },
+  'packages/llm/llm-deepseek-account': { category: 'optional', reason: 'Disabled by the local-only privacy layer; data egress or DeepSeek-service integration.' },
+  'packages/llm/plugin-package-inventory-deepseek': { category: 'optional', reason: 'Disabled by the local-only privacy layer; data egress or DeepSeek-service integration.' },
+  'packages/session/session-log-deepseek': { category: 'optional', reason: 'Disabled by the local-only privacy layer; data egress or DeepSeek-service integration.' },
+  'packages/session/session-telemetry': { category: 'optional', reason: 'Disabled by the local-only privacy layer; data egress or DeepSeek-service integration.' },
+  'packages/session/session-telemetry-otel': { category: 'optional', reason: 'Disabled by the local-only privacy layer; data egress or DeepSeek-service integration.' },
+  'packages/web/web-deepseek-api': { category: 'optional', reason: 'Disabled by the local-only privacy layer; data egress or DeepSeek-service integration.' },
+  'packages/web/web-search-deepseek': { category: 'optional', reason: 'Disabled by the local-only privacy layer; data egress or DeepSeek-service integration.' },
 }

@@ -1,0 +1,54 @@
+# Local-only privacy layer for the Web and Desktop app, applied after the
+# preset patches. Pairs with dsh-base's privacy.patch.yml.
+
+# Desktop product analytics and its OTel exporter.
+- id: desktop-product-telemetry
+  disabled: true
+
+- id: product-analytics
+  disabled: true
+
+# Like/Dislike, the feedback dialog, and the messageFeedback Remote.
+- id: message-feedback
+  disabled: true
+
+- id: ui-message-feedback
+  disabled: true
+
+# DeepSeek account sign-in and balance surfaces; their provider is disabled in
+# dsh-base.
+- id: account-controller
+  disabled: true
+
+- id: ui-settings-account
+  disabled: true
+
+# The DeepSeek search switch; its providers are disabled in dsh-base.
+- id: ui-settings-web-search
+  disabled: true
+
+# Terminal banner and Web badge. At load the Host half checks that every row
+# below is present and disabled, and prints a red warning naming any that is
+# not; keep this list in step with both privacy.patch.yml files.
+- insert:
+    - id: ui-privacy-notice
+      name: '@deepseek-ai/dsh-client-ui-privacy-notice'
+      config:
+        disabledRows:
+          - session-log-deepseek
+          - session-telemetry-otel
+          - command-feedback
+          - plugin-package-inventory-deepseek
+          - deepseek-llm-api-extensions
+          - llm-deepseek
+          - llm-deepseek-account
+          - deepseek-account
+          - web-search-deepseek
+          - web-deepseek-api
+          - desktop-product-telemetry
+          - product-analytics
+          - message-feedback
+          - ui-message-feedback
+          - account-controller
+          - ui-settings-account
+          - ui-settings-web-search
