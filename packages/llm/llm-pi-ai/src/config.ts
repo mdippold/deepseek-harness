@@ -171,6 +171,13 @@ export interface PiAiProviderProfile {
    * requests instead of being rejected by a request-size cap.
    */
   maxRequestImageBytes?: number
+  /**
+   * Maximum retained image occurrences per request, for servers that cap the
+   * image count (vLLM `--limit-mm-per-prompt`). The oldest occurrences are
+   * replaced by text placeholders until the request fits; omission leaves the
+   * count unbounded.
+   */
+  maxImagesPerRequest?: number
   /** Total-pixel budget for each deterministic inline request version. */
   requestImagePixelBudget?: number
   /**
@@ -345,6 +352,7 @@ const profile = z.object({
   maxRequestImageBytes: z.number().step(1).min(1).default(DEFAULT_MAX_REQUEST_IMAGE_BYTES),
   requestImagePixelBudget: z.number().step(1).min(1).default(DEFAULT_REQUEST_IMAGE_PIXEL_BUDGET),
   requestImageMaxBytes: z.number().step(1).min(1).default(DEFAULT_REQUEST_IMAGE_MAX_BYTES),
+  maxImagesPerRequest: z.number().step(1).min(1),
   retryPolicy: RetryPolicySchema,
 })
 
@@ -445,6 +453,10 @@ export function resolveProfiles(
     const requestImageMaxBytes = source.requestImageMaxBytes ?? DEFAULT_REQUEST_IMAGE_MAX_BYTES
     if (!Number.isSafeInteger(requestImageMaxBytes) || requestImageMaxBytes <= 0) {
       throw new Error(`llm-pi-ai: provider "${provider}" requestImageMaxBytes must be a positive safe integer`)
+    }
+    if (source.maxImagesPerRequest !== undefined
+      && (!Number.isSafeInteger(source.maxImagesPerRequest) || source.maxImagesPerRequest <= 0)) {
+      throw new Error(`llm-pi-ai: provider "${provider}" maxImagesPerRequest must be a positive safe integer`)
     }
     // Detached from the configuration object because pi-ai types `Model.input`
     // mutable. The schema's explicit default covers an absent key, so an empty

@@ -360,6 +360,23 @@ describe('pi-ai request context conversion', () => {
     expect(readImageRequest).toHaveBeenCalledTimes(1)
   })
 
+  it('fails with the count to offload when retained occurrences exceed the image-count bound', async () => {
+    const sized: ImageAttachmentRef = { ...ref, bytes: 3 }
+    const readImageRequest = vi.fn((value: ImageAttachmentRef) => Promise.resolve(requestImage(value, Uint8Array.of(1, 2, 3))))
+    const images = [1, 2, 3].map(() => ({ type: 'image' as const, attachment: sized }))
+
+    await expect(toPiContext(request([user(images)]), imageContext(projectionStore(readImageRequest), { maxImagesPerRequest: 2 })))
+      .rejects.toMatchObject({ code: 'IMAGE_OFFLOAD_REQUIRED', failure: { offloadImages: 1 } })
+    const fits = await toPiContext(
+      request([user([{ ...images[0]!, offloaded: true }, ...images.slice(1)])]),
+      imageContext(projectionStore(readImageRequest), { maxImagesPerRequest: 2 }),
+    )
+    expect(fits.messages[0]).toMatchObject({
+      role: 'user',
+      content: [{ type: 'text', text: offloadedImageText(sized) }, { type: 'text' }, { type: 'image' }, { type: 'text' }, { type: 'image' }],
+    })
+  })
+
   it('renders an offloaded occurrence with independently resolved access', async () => {
     const sized: ImageAttachmentRef = { ...ref, bytes: 3 }
     const access = { readonlyPath: '/tmp/dsh-normalized-image' }
