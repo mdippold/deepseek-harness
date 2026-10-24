@@ -185,3 +185,7 @@ Docs accompany every code change: update affected README and JSDoc contracts tog
 ## Vendoring policy
 
 `vendor/` packages are pinned source copies (manifest with upstream SHAs in [vendor/README.md](vendor/README.md)). Update via the sync procedure there; re-apply or retire the logged local modifications; rerun `pnpm run test && pnpm run build`.
+
+## Fork: local-only privacy layer
+
+This fork disables data egress and the built-in DeepSeek provider. Follow [fork-privacy-rc-update](.agents/skills/fork-privacy-rc-update/SKILL.md) before moving to a new upstream tag or changing a privacy-disabled row.

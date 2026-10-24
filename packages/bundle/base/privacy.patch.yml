@@ -1,0 +1,42 @@
+# Local-only privacy layer, applied after cordis.patch.yml. Disables every row
+# that sends Session content, identity, or usage data off the machine, and the
+# built-in DeepSeek provider so only user-configured providers (Settings ->
+# Models) remain. The agent-default-model row still names deepseek-official;
+# saving a local model as the default in Settings replaces it.
+
+# Session-log suffix attached to every official DeepSeek API request.
+- id: session-log-deepseek
+  disabled: true
+
+# OTel upload of the Session-log prefix after explicit feedback.
+- id: session-telemetry-otel
+  disabled: true
+
+# `/feedback` command and the sessionFeedback Remote.
+- id: command-feedback
+  disabled: true
+
+# Installed-plugin inventory attached to official DeepSeek API requests.
+- id: plugin-package-inventory-deepseek
+  disabled: true
+
+- id: deepseek-llm-api-extensions
+  disabled: true
+
+# Built-in deepseek-official provider (API key and account sign-in routes).
+- id: llm-deepseek
+  disabled: true
+
+- id: llm-deepseek-account
+  disabled: true
+
+- id: deepseek-account
+  disabled: true
+
+# DeepSeek search and fetch APIs; web_search has no provider and is withheld
+# from model steps, while web_fetch keeps the local HTTP provider.
+- id: web-search-deepseek
+  disabled: true
+
+- id: web-deepseek-api
+  disabled: true
