@@ -1,0 +1,15 @@
+# Local-only privacy layer, applied after cordis.patch.yml. Disables the
+# Session-log and plugin-inventory request fields and the built-in DeepSeek
+# provider; a local provider must be supplied by a profile or --patch overlay.
+
+- id: session-log-deepseek
+  disabled: true
+
+- id: plugin-package-inventory-deepseek
+  disabled: true
+
+- id: deepseek-llm-api-extensions
+  disabled: true
+
+- id: llm-deepseek
+  disabled: true

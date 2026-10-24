@@ -25,6 +25,7 @@
   "files": [
     "lib/index.js",
     "cordis.patch.yml",
+    "privacy.patch.yml",
     "lib/types/**/*.d.ts",
     "lib/types/**/*.d.ts.map",
     "lib/**/*.js.map",
@@ -33,7 +34,10 @@
   "license": "MIT",
   "dsh": {
     "bundle": {
-      "patch": "./cordis.patch.yml"
+      "patch": [
+        "./cordis.patch.yml",
+        "./privacy.patch.yml"
+      ]
     }
   },
   "dependencies": {

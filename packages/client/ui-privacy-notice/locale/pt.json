@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Aviso de privacidade somente local",
+    "description": "Indica que esta build desativa o envio de dados, o feedback e o provedor DeepSeek integrado."
+  }
+}

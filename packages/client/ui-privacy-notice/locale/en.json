@@ -1,0 +1,6 @@
+{
+  "meta": {
+    "title": "Local-only privacy notice",
+    "description": "Shows that this build disables data upload, feedback, and the built-in DeepSeek provider."
+  }
+}
